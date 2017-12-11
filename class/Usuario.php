@@ -50,10 +50,15 @@ class Usuario{
 		return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin;");
 	}
 	public static function search($login){
-		$sql = new Sql();
-		return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin", array(
-				':SEARCH'=>"%".$login."%"
-			));
+     $sql = new Sql();
+     $results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin", array(
+         ':SEARCH'=>"%".$login."%"
+     ));
+     foreach ($results as &$row) {
+         $row['deslogin'] = utf8_encode($row['deslogin']);
+     }
+     return $results;
+ }
 	}
 
 

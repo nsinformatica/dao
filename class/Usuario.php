@@ -59,7 +59,7 @@ class Usuario{
      }
      return $results;
  }
-	}
+	
 
 
 	public function __toString(){
